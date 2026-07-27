@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: taskmaster
-          image: madeep2669/task-master-pro:latest # Image that will be used to containers in the cluster
+          image: crazy1/task-master-pro # Image that will be used to containers in the cluster
           imagePullPolicy: Always
           ports:
             - containerPort: 8080 # The port that the container is running on in the cluster
