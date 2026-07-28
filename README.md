@@ -1,4 +1,16 @@
-# Create 3 EC2 Instances with 20GB RAM and choose t2.medium
+# EKS Cluster Setup Guide
+
+This guide covers the installation and configuration of Docker, Jenkins, Trivy, SonarQube, Nexus, AWS CLI, kubectl, and eksctl for an Amazon EKS environment.
+
+---
+
+# Prerequisites
+
+- Create **3 EC2 Instances**
+- Instance Type: **t2.medium**
+- Storage: **20 GB**
+- Ubuntu Operating System
+
 # Install Docker on All 3 VMs
 
 Update the package index:
@@ -108,6 +120,7 @@ Link: https://aquasecurity.github.io/trivy/v0.18.3/installation/
 
  From : Debian/Ubuntu (Official)
 
+---
 
 # SonarQube Setup
 
