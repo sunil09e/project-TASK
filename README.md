@@ -1,85 +1,141 @@
-# Task Master Pro
+# Create 3 EC2 Instances with 20GB RAM and choose t2.medium
+# Install Docker on All 3 VMs
 
-Welcome to Task Master Pro, a comprehensive Java application designed to manage tasks efficiently. This project is developed and maintained by DevOps Shack, a YouTube channel dedicated to DevOps tutorials and best practices.
+# Set up Docker's apt repository.
 
-## Table of Contents
-- [Introduction](#introduction)
-- [Features](#features)
-- [Installation](#installation)
-- [Usage](#usage)
-- [Contributing](#contributing)
-- [License](#license)
-- [Contact](#contact)
 
-## Introduction
+# Add Docker's official GPG key:
+sudo apt update
+sudo apt install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
 
-Task Master Pro is a task management application built using Java. It provides a robust set of features to help users create, manage, and track tasks. This project aims to demonstrate best practices in Java development, including project structure, coding standards, and documentation.
+# Add the repository to Apt sources:
+sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
+Types: deb
+URIs: https://download.docker.com/linux/ubuntu
+Suites: $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}")
+Components: stable
+Architectures: $(dpkg --print-architecture)
+Signed-By: /etc/apt/keyrings/docker.asc
+EOF
 
-## Features
+sudo apt update
 
-- Create, update, and delete tasks
-- Mark tasks as complete or incomplete
-- User authentication and authorization
+# Install the Docker packages
+sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
 
-## Installation
+# Grant permission to Docker socket (optional, for convenience):
+  sudo chmod 666 /var/run/docker.sock
 
-### Prerequisites
+By following these steps, you should have successfully installed Docker on your Ubuntu system. You can now start using Docker to containerize and manage your applications.
 
-- Java Development Kit (JDK) 17 or later
-- Apache Maven 3.6.0 or later
-- A database (H2)
+Follow this official document if you find any errors:
+Link: Install Docker Engine on Ubuntu | Docker Docs
 
-### Steps
+# Setting Up Jenkins on Ubuntu
+ Link: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
 
-1. Clone the repository:
+# Start and enable Jenkins:
+sudo systemctl start jenkins
 
-    ```sh
-    git clone https://github.com/jaiswaladi246/Task-Master-Pro.git
-    cd Task-Master-Pro
-    ```
+sudo systemctl enable jenkins
 
-2. Configure the database:
+ # Access Jenkins:
+Open a web browser and go to http://your_server_ip_or_domain:8080.
 
-    Update the `application.properties` file with your database configuration.
+You will see a page asking for the initial admin password. Retrieve it using:
 
-3. Build the project:
+sudo cat /var/lib/jenkins/secrets/initialAdminPassword
 
-    ```sh
-    mvn clean install
-    ```
+Enter the password, install the suggested plugins, and create your first admin user.
 
-4. Run the application:
+# Installing Trivy on Jenkins Server
 
-    ```sh
-    mvn spring-boot:run
-    ```
+Link: https://aquasecurity.github.io/trivy/v0.18.3/installation/
 
-## Usage
+ From : Debian/Ubuntu (Official)
 
-Once the application is running, you can access it at `http://localhost:8080`. You can use the web interface to manage your tasks.
+# SonarQube Setup:
 
-### Endpoints
+SSH into the SonarQube EC2 instance.
 
-- `/tasks` - View and manage tasks
-- `/tasks/{id}` - View, update, or delete a specific task
-- `/login` - User login
-- `/register` - User registration
+docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
 
-## Contributing
+# Access SonarQube using:
 
-We welcome contributions to improve Task Master Pro. If you have a feature request, bug report, or improvement suggestion, please open an issue or submit a pull request.
+http://<public-ip>:9000
 
-### Steps to Contribute
+Default Credentials:
 
-1. Fork the repository
-2. Create a new branch (`git checkout -b feature-branch`)
-3. Make your changes
-4. Commit your changes (`git commit -m 'Add some feature'`)
-5. Push to the branch (`git push origin feature-branch`)
-6. Open a pull request
+Username: admin
+Password: admin
 
-## License
+# Nexus Setup:
 
-This project is licensed under the MIT License. See the [LICENSE](LICENSE) file for more details.
+SSH into the Nexus EC2 instance.
+
+docker run -d --name nexus -p 8081:8081 sonatype/nexus3
+
+# Access Nexus using:
+
+http://<public-ip>:8081
+
+Sign in to Nexus using the initial admin password. The password is stored in:
+
+/nexus-data/admin.password
+
+Enter the Nexus container:
+
+docker exec -it <container-ID> /bin/sh
+Then run:
+
+cat /nexus-data/admin.password
+
+You will get the password.
+
+Username: admin
+
+Password: 66db8137-b229-4682-a789-10655502bd3b
+
+Note: Replace the example password above with the password generated on your own Nexus server. The password is unique for each Nexus installation.
+
+# EKS Setup:
+# First, create a user in AWS IAM with any name.
+
+# Attach the following policies to the newly created user:
+AmazonEC2FullAccess
+AmazonEKS_CNI_Policy
+AmazonEKSClusterPolicy
+AmazonEKSWorkerNodePolicy
+AWSCloudFormationFullAccess
+IAMFullAccess
+
+# One more policy we need to create with the content below
+{
+  "Version": "2012-10-17",
+  "Statement": [
+    {
+      "Sid": "VisualEditor0",
+      "Effect": "Allow",
+      "Action": "eks:*",
+      "Resource": "*"
+    }
+  ]
+}
+
+Attach this policy to your IAM user.
+
+
+
+
+
+
+ 
+
+
+
+
 
 
