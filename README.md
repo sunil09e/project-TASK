@@ -1,17 +1,28 @@
 # Create 3 EC2 Instances with 20GB RAM and choose t2.medium
 # Install Docker on All 3 VMs
 
-# Set up Docker's apt repository.
+Update the package index:
 
-
-# Add Docker's official GPG key:
+```bash
 sudo apt update
-sudo apt install ca-certificates curl
-sudo install -m 0755 -d /etc/apt/keyrings
-sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
-sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
 
-# Add the repository to Apt sources:
+## Add Docker's Official GPG Key
+
+```bash
+sudo apt install -y ca-certificates curl
+
+sudo install -m 0755 -d /etc/apt/keyrings
+
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg \
+-o /etc/apt/keyrings/docker.asc
+
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+```
+
+## Add Docker Repository
+
+```bash
 sudo tee /etc/apt/sources.list.d/docker.sources <<EOF
 Types: deb
 URIs: https://download.docker.com/linux/ubuntu
@@ -20,19 +31,40 @@ Components: stable
 Architectures: $(dpkg --print-architecture)
 Signed-By: /etc/apt/keyrings/docker.asc
 EOF
+```
 
+Update the package index again:
+
+```bash
 sudo apt update
+```
 
-# Install the Docker packages
-sudo apt install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+## Install Docker Packages
 
-# Grant permission to Docker socket (optional, for convenience):
-  sudo chmod 666 /var/run/docker.sock
+```bash
+sudo apt install -y docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+```
+
+## Verify Docker Installation
+
+```bash
+docker --version
+```
+
+## Grant Permission to Docker Socket (Optional)
+
+```bash
+sudo chmod 666 /var/run/docker.sock
+```
+
+This command allows Docker commands to be executed without using `sudo`.
+
+**Official Docker Documentation:**
+
+https://docs.docker.com/engine/install/ubuntu/
 
 By following these steps, you should have successfully installed Docker on your Ubuntu system. You can now start using Docker to containerize and manage your applications.
 
-Follow this official document if you find any errors:
-Link: Install Docker Engine on Ubuntu | Docker Docs
 
 # Setting Up Jenkins on Ubuntu
  Link: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
