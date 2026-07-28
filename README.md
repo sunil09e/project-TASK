@@ -299,6 +299,95 @@ kubectl version --client
 
 eksctl version
 ```
+# Create EKS Cluster
+
+Create an EKS control plane without a managed node group.
+
+```bash
+eksctl create cluster \
+  --name=my-eks \
+  --region=ap-south-1 \
+  --zones=ap-south-1a,ap-south-1b \
+  --without-nodegroup
+```
+
+---
+
+# Associate IAM OIDC Provider
+
+Associate the IAM OIDC provider with your EKS cluster.
+
+```bash
+eksctl utils associate-iam-oidc-provider \
+  --region ap-south-1 \
+  --cluster my-eks \
+  --approve
+```
+
+> **Note:** Ensure the `--region` and `--cluster` values match the cluster you created.
+
+---
+
+# Create a Managed Node Group
+
+```bash
+eksctl create nodegroup \
+  --cluster=my-eks \
+  --region=ap-south-1 \
+  --name=node1 \
+  --node-type=t3.medium \
+  --nodes=3 \
+  --nodes-min=2 \
+  --nodes-max=4 \
+  --node-volume-size=20 \
+  --ssh-access \
+  --ssh-public-key=<YOUR-KEYPAIR-NAME> \
+  --managed \
+  --asg-access \
+  --external-dns-access \
+  --full-ecr-access \
+  --appmesh-access \
+  --alb-ingress-access
+```
+
+> **Note:** Replace `<YOUR-KEYPAIR-NAME>` with the name of your AWS EC2 Key Pair (do **not** include the `.pem` extension).
+
+---
+
+# Verify the Cluster
+
+Check the cluster information:
+
+```bash
+eksctl get cluster
+```
+
+Check the node group:
+
+```bash
+eksctl get nodegroup --cluster my-eks7 --region ap-south-1
+```
+
+Verify the worker nodes:
+
+```bash
+kubectl get nodes
+```
+
+Verify the system pods:
+
+```bash
+kubectl get pods -A
+```
+
+---
+
+## Security Group Configuration
+
+After the node group is created:
+
+- Open the required **Inbound Rules** in the **Additional Security Group** attached to the worker nodes, if needed for your applications.
+  
 
 
 
