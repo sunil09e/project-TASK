@@ -198,18 +198,29 @@ admin
 
 ---
 
-# EKS Setup:
-# First, create a user in AWS IAM with any name.
+# EKS Setup
 
-# Attach the following policies to the newly created user:
-AmazonEC2FullAccess
-AmazonEKS_CNI_Policy
-AmazonEKSClusterPolicy
-AmazonEKSWorkerNodePolicy
-AWSCloudFormationFullAccess
-IAMFullAccess
+## Step 1: Create an IAM User
 
-# One more policy we need to create with the content below
+Create a new IAM User with any name.
+
+---
+
+## Step 2: Attach the Following Policies
+
+- AmazonEC2FullAccess
+- AmazonEKS_CNI_Policy
+- AmazonEKSClusterPolicy
+- AmazonEKSWorkerNodePolicy
+- AWSCloudFormationFullAccess
+- IAMFullAccess
+
+---
+
+---
+
+## Step 3: Create a Custom IAM Policy
+
 Create a new IAM policy using the following JSON:
 
 ```json
@@ -227,6 +238,67 @@ Create a new IAM policy using the following JSON:
 ```
 
 Attach this custom policy to the IAM user.
+
+---
+
+# Install AWS CLI
+
+```bash
+curl "https://awscli.amazonaws.com/awscli-exe-linux-x86_64.zip" -o "awscliv2.zip"
+
+sudo apt update
+
+sudo apt install unzip -y
+
+unzip awscliv2.zip
+
+sudo ./aws/install
+
+aws configure
+```
+
+---
+
+# Install kubectl
+
+```bash
+curl -o kubectl https://amazon-eks.s3.us-west-2.amazonaws.com/1.19.6/2021-01-05/bin/linux/amd64/kubectl
+
+chmod +x kubectl
+
+sudo mv kubectl /usr/local/bin
+
+kubectl version --short --client
+```
+
+---
+
+# Install eksctl
+
+```bash
+curl --silent --location \
+"https://github.com/weaveworks/eksctl/releases/latest/download/eksctl_$(uname -s)_amd64.tar.gz" | tar xz -C /tmp
+
+sudo mv /tmp/eksctl /usr/local/bin
+
+eksctl version
+```
+
+---
+
+# Verification Commands
+
+```bash
+docker --version
+
+jenkins --version
+
+aws --version
+
+kubectl version --client
+
+eksctl version
+```
 
 
 
