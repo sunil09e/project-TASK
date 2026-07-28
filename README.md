@@ -492,7 +492,23 @@ Go to:
 3. **Maven**
    - Name: `maven3`
    - Version: `3.6.3`
+     
+4. **Docker**
+   - Name: `docker`
+   - Install automatically from docker.com
 
+---
+
+Now configure the SonarQube server in Jenkins.
+
+Firstly, generate the token in SonarQube.
+
+Go to:
+
+**Administration → Security → Users → Update Token**
+
+- Name: `sonartoken`
+- Click **Generate**
 
 
 
