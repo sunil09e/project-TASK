@@ -113,6 +113,9 @@ AWSCloudFormationFullAccess
 IAMFullAccess
 
 # One more policy we need to create with the content below
+Create a new IAM policy using the following JSON:
+
+```json
 {
   "Version": "2012-10-17",
   "Statement": [
@@ -124,8 +127,9 @@ IAMFullAccess
     }
   ]
 }
+```
 
-Attach this policy to your IAM user.
+Attach this custom policy to the IAM user.
 
 
 
