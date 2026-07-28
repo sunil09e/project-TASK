@@ -108,20 +108,41 @@ Link: https://aquasecurity.github.io/trivy/v0.18.3/installation/
 
  From : Debian/Ubuntu (Official)
 
-# SonarQube Setup:
+
+# SonarQube Setup
 
 SSH into the SonarQube EC2 instance.
 
-docker run -d --name sonar -p 9000:9000 sonarqube:lts-community
+Run:
 
-# Access SonarQube using:
+```bash
+docker run -d \
+--name sonar \
+-p 9000:9000 \
+sonarqube:lts-community
+```
 
-http://<public-ip>:9000
+Access SonarQube:
 
-Default Credentials:
+```
+http://<Public-IP>:9000
+```
 
-Username: admin
-Password: admin
+Default Credentials
+
+Username:
+
+```
+admin
+```
+
+Password:
+
+```
+admin
+```
+
+---
 
 # Nexus Setup:
 
