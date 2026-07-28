@@ -389,7 +389,109 @@ After the node group is created:
 - Open the required **Inbound Rules** in the **Additional Security Group** attached to the worker nodes, if needed for your applications.
   
 
+# Push Project to Your GitHub Repository
 
+Clone the repository and create your own repository, then push the project to your GitHub repository.
+
+## 1. Clone the Repository
+
+```bash
+git clone https://github.com/sunil09e/project-Task-Master-Pro.git
+```
+
+Change the remote repository:
+
+```bash
+git remote set-url origin https://github.com/sunil09e/project-Task-Master-Pro.git
+```
+
+> Replace with your GitHub repository.
+
+Or add a new remote:
+
+```bash
+git remote add new-origin https://github.com/sunil09e/project-Task-Master-Pro.git
+```
+
+> Replace with your GitHub repository.
+
+---
+
+## 2. Initialize Git Repository
+
+```bash
+git init
+```
+
+---
+
+## 3. Add Files to Git
+
+Stage all files for the first commit:
+
+```bash
+git add .
+```
+
+---
+
+## 4. Commit Files
+
+Commit the staged files with a commit message:
+
+```bash
+git commit -m "Initial commit"
+```
+```bash
+git commit -m "Initial commit"
+```
+
+## 5. Push to GitHub
+
+Push the local repository to GitHub:
+
+```bash
+git push -u origin main
+```
+
+---
+
+# Jenkins Setup Complete
+
+## Install Plugins in Jenkins
+
+1. Eclipse Temurin Installer → for JDK
+2. SonarQube Scanner
+3. Docker
+4. Docker Pipeline
+5. Kubernetes
+6. Kubernetes CLI
+7. Kubernetes Credentials
+8. Kubernetes Client API
+9. Config File Provider → for Nexus
+10. Maven Integration
+11. Pipeline Maven Integration
+
+---
+
+Now we have installed the tools. Next, we need to configure them.
+
+Go to:
+
+**Manage Jenkins → Tools**
+
+1. **JDK**
+   - Name: `jdk17`
+   - Install automatically from Adoptium
+   - Version: `JDK 17 (Latest)`
+
+2. **SonarQube Scanner**
+   - Name: `sonar-scanner`
+   - Install automatically
+
+3. **Maven**
+   - Name: `maven3`
+   - Version: `3.6.3`
 
 
 
