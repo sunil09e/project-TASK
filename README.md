@@ -144,34 +144,46 @@ admin
 
 ---
 
-# Nexus Setup:
+# Nexus Repository Setup
 
 SSH into the Nexus EC2 instance.
 
-docker run -d --name nexus -p 8081:8081 sonatype/nexus3
+Run:
 
-# Access Nexus using:
+```bash
+docker run -d \
+--name nexus \
+-p 8081:8081 \
+sonatype/nexus3
+```
 
-http://<public-ip>:8081
+Access Nexus:
 
-Sign in to Nexus using the initial admin password. The password is stored in:
+```
+http://<Public-IP>:8081
+```
 
-/nexus-data/admin.password
+Enter the container:
 
-Enter the Nexus container:
+```bash
+docker exec -it <Container-ID> /bin/bash
+```
 
-docker exec -it <container-ID> /bin/sh
-Then run:
+Retrieve the admin password:
 
+```bash
 cat /nexus-data/admin.password
+```
 
-You will get the password.
+Default Username:
 
-Username: admin
+```
+admin
+```
 
-Password: 66db8137-b229-4682-a789-10655502bd3b
+> **Note:** Every Nexus installation generates a unique admin password.
 
-Note: Replace the example password above with the password generated on your own Nexus server. The password is unique for each Nexus installation.
+---
 
 # EKS Setup:
 # First, create a user in AWS IAM with any name.
