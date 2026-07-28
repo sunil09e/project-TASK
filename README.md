@@ -66,22 +66,41 @@ https://docs.docker.com/engine/install/ubuntu/
 By following these steps, you should have successfully installed Docker on your Ubuntu system. You can now start using Docker to containerize and manage your applications.
 
 
-# Setting Up Jenkins on Ubuntu
- Link: https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
+# Jenkins Installation
 
-# Start and enable Jenkins:
+Follow the official Jenkins installation guide:
+
+https://www.jenkins.io/doc/book/installing/linux/#debianubuntu
+
+## Start and Enable Jenkins
+
+```bash
 sudo systemctl start jenkins
-
 sudo systemctl enable jenkins
+```
 
- # Access Jenkins:
-Open a web browser and go to http://your_server_ip_or_domain:8080.
+## Access Jenkins
 
-You will see a page asking for the initial admin password. Retrieve it using:
+Open your browser:
 
+```
+http://<Public-IP>:8080
+```
+
+Retrieve the initial admin password:
+
+```bash
 sudo cat /var/lib/jenkins/secrets/initialAdminPassword
+```
 
-Enter the password, install the suggested plugins, and create your first admin user.
+Copy the password and paste it into the Jenkins setup page.
+
+Then:
+
+- Install Suggested Plugins
+- Create the first Admin User
+
+---
 
 # Installing Trivy on Jenkins Server
 
