@@ -90,8 +90,6 @@ subjects:
 
 
 
-## Generate Token Using Service Account
+### Generate token using service account in the namespace
 
-Generate a token for the ServiceAccount by following the official Kubernetes documentation:
-
-[Create Service Account Token](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts)
+[Create Token](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#:~:text=To%20create%20a%20non%2Dexpiring,with%20that%20generated%20token%20data.)
