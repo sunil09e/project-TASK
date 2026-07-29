@@ -510,7 +510,149 @@ Go to:
 - Name: `sonartoken`
 - Click **Generate**
 
+## Add the SonarQube Token in Jenkins
 
+Go to:
+
+**Manage Jenkins → Credentials → Global → Add Credentials**
+
+Configure the credentials as follows:
+
+- **Kind:** Secret text
+- **Secret:** `<Your SonarQube Token>`
+- **ID:** `sonar-token`
+- **Description:** `sonar-token`
+
+Click **Create** or **Save**.
+
+## Configure SonarQube Server in Jenkins
+
+Go to:
+
+**Manage Jenkins → System → SonarQube Servers**
+
+Configure the server with the following details:
+
+- **Name:** `sonar`
+- **Server URL:** `http://<Public-IP>:9000`
+- **Server Authentication Token:** `sonar-token`
+
+Click **Save**.
+
+---
+
+### Note
+
+- **SonarQube Scanner:** The tool that scans your source code and sends the analysis results to the SonarQube server.
+- **SonarQube Server:** Receives, processes, and displays the code analysis results.
+
+# Nexus Configuration
+
+Update your `pom.xml` file with your Nexus repositories.
+
+Add the following `distributionManagement` section:
+
+```xml
+<distributionManagement>
+    <repository>
+        <id>maven-releases</id>
+        <url>http://<NEXUS-PUBLIC-IP>:8081/repository/maven-releases/</url>
+    </repository>
+
+    <snapshotRepository>
+        <id>maven-snapshots</id>
+        <url>http://<NEXUS-PUBLIC-IP>:8081/repository/maven-snapshots/</url>
+    </snapshotRepository>
+</distributionManagement>
+```
+
+Copy the **maven-releases** URL and **maven-snapshots** URL from Nexus and update them in your `pom.xml` file.
+
+Example:
+
+```xml
+<url>http://54.242.176.54:8081/repository/maven-releases/</url>
+
+<url>http://54.242.176.54:8081/repository/maven-snapshots/</url>
+```
+
+## Get the Nexus Repository URLs
+
+1. Open the Nexus Dashboard.
+2. Go to **Browse**.
+3. Select **maven-releases**.
+4. Click the **Copy** button in the **URL** column.
+5. Copy the URL and update it in your `pom.xml` file.
+
+Example:
+
+```text
+http://<NEXUS-PUBLIC-IP>:8081/repository/maven-releases/
+```
+
+6. Select **maven-snapshots**.
+7. Click the **Copy** button in the **URL** column.
+8. Copy the URL and update it in your `pom.xml` file.
+
+Example:
+
+```text
+http://<NEXUS-PUBLIC-IP>:8081/repository/maven-snapshots/
+```
+
+# Nexus Authentication with Jenkins
+
+Go to:
+
+**Manage Jenkins → Managed Files → Add a New Config**
+
+Select:
+
+- **Global Maven settings.xml**
+- **ID:** `maven-setting`
+
+Click **Next**.
+
+---
+
+## Configure Maven Settings
+
+In the **Content** section, add the Nexus server credentials:
+
+```xml
+-->
+    <server>
+        <id>maven-releases</id>
+        <username>admin</username>
+        <password><NEXUS_PASSWORD></password>
+    </server>
+
+    <server>
+        <id>maven-snapshots</id>
+        <username>admin</username>
+        <password><NEXUS_PASSWORD></password>
+    </server>
+```
+
+Replace `<NEXUS_PASSWORD>` with your Nexus admin password.
+
+Click **Submit** to save the Maven settings.
+
+# Add DockerHub Credentials in Jenkins
+
+Go to:
+
+**Manage Jenkins → Credentials → Global → Add Credentials**
+
+Configure the credentials as follows:
+
+- **Kind:** Username with password
+- **Username:** `<Your DockerHub Username>`
+- **Password:** `<Your DockerHub Password or Personal Access Token>`
+- **ID:** `dockerhub-creds`
+- **Description:** `dockerhub-creds`
+
+Click **Create** or **Save**.
 
  
 
