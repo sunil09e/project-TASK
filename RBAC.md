@@ -100,9 +100,6 @@ https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#
 
 ## Generate Token Using Service Account
 
-After creating the ServiceAccount and Secret, generate the token using the Kubernetes Service Account.
+Generate a token for the ServiceAccount by following the official Kubernetes documentation:
 
-Refer to the official Kubernetes documentation:
-
-**Create Token:**  
-https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts
+[Create Service Account Token](https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts)
