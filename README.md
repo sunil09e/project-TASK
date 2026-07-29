@@ -754,7 +754,13 @@ Email was successfully sent.
 
 Click **Save** to apply the changes.
 
-<img width="385" height="106" alt="image" src="https://github.com/user-attachments/assets/9e58585c-a865-484a-af8d-3c72fe6e7ef4" />
+# Write the Jenkinsfile
+# Access the Application
+Example:
+
+```text
+http://a6ba9cacd5ecc4771868899d96d18b2b-1117460143.ap-south-1.elb.amazonaws.com
+```
 
 
 
