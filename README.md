@@ -1,4 +1,4 @@
-<img width="385" height="106" alt="image" src="https://github.com/user-attachments/assets/b17923fb-6615-4d03-8d5f-e4f045664b0f" /># EKS Cluster Setup Guide
+# EKS Cluster Setup Guide
 
 This guide covers the installation and configuration of Docker, Jenkins, Trivy, SonarQube, Nexus, AWS CLI, kubectl, and eksctl for an Amazon EKS environment.
 
