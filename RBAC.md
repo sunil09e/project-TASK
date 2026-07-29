@@ -96,3 +96,13 @@ subjects:
 '''yaml
 https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts
 '''         
+
+
+## Generate Token Using Service Account
+
+After creating the ServiceAccount and Secret, generate the token using the Kubernetes Service Account.
+
+Refer to the official Kubernetes documentation:
+
+**Create Token:**  
+https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts
