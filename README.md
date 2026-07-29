@@ -1,4 +1,4 @@
-# EKS Cluster Setup Guide
+<img width="385" height="106" alt="image" src="https://github.com/user-attachments/assets/b17923fb-6615-4d03-8d5f-e4f045664b0f" /># EKS Cluster Setup Guide
 
 This guide covers the installation and configuration of Docker, Jenkins, Trivy, SonarQube, Nexus, AWS CLI, kubectl, and eksctl for an Amazon EKS environment.
 
@@ -654,7 +654,109 @@ Configure the credentials as follows:
 
 Click **Create** or **Save**.
 
- 
+
+ # Create Service Account, Role, Role Binding, and Secret for Jenkins Service Account
+
+ Follow the RBAC.MD File
+
+ # From kubectl -n webapps describe secret mysecretname
+ ## Add the Kubernetes Token in Jenkins
+
+Go to:
+
+**Manage Jenkins → Credentials → Global → Add Credentials**
+
+Configure the credentials as follows:
+
+- **Kind:** Secret text
+- **Secret:** `<Kubernetes ServiceAccount Token>`
+- **ID:** `k8s_token`
+- **Description:** `k8s_token`
+
+Click **Create** or **Save**.
+
+# Email Notification Configuration
+
+Generate a Gmail App Password by visiting the following URL:
+
+https://myaccount.google.com/apppasswords
+
+Copy the generated App Password.
+
+## Add Gmail Credentials in Jenkins
+
+Go to:
+
+**Manage Jenkins → Credentials → Global → Add Credentials**
+
+Configure the credentials as follows:
+
+- **Kind:** Username with password
+- **Scope:** Global
+- **Username:** `<your-gmail-address>`
+- **Password:** `<Gmail App Password>`
+- **ID:** `mail-cred`
+- **Description:** `mail-cred`
+
+Click **Create** or **Save**.
+
+## Configure Extended E-mail Notification
+
+Go to:
+
+**Manage Jenkins → System → Extended E-mail Notification**
+
+Configure the following settings:
+
+- **SMTP Server:** `smtp.gmail.com`
+- **SMTP Port:** `465`
+
+Click **Advanced** and configure:
+
+- **Credentials:** `mail-cred`
+- Enable **Use SSL**
+
+Click **Save**.
+
+---
+
+## Configure E-mail Notification
+
+Go to:
+
+**Manage Jenkins → System → E-mail Notification**
+
+Configure the following settings:
+
+- **SMTP Server:** `smtp.gmail.com`
+
+Click **Advanced** and enable:
+
+- **Use SMTP Authentication**
+- **Use SSL**
+
+Enter the following details:
+
+- **Username:** `<your-gmail-address>`
+- **Password:** `<Gmail App Password>`
+- **SMTP Port:** `465`
+
+To verify the configuration:
+
+- Enable **Test configuration by sending test e-mail**
+- **Test e-mail recipient:** `<your-gmail-address>`
+
+Click **Test Configuration**. If the configuration is successful, Jenkins will display:
+
+```
+Email was successfully sent.
+```
+
+Click **Save** to apply the changes.
+
+<img width="385" height="106" alt="image" src="https://github.com/user-attachments/assets/9e58585c-a865-484a-af8d-3c72fe6e7ef4" />
+
+
 
 
 
