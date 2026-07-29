@@ -89,14 +89,6 @@ subjects:
 ```
 
 
-```
-
-### Generate token using service account in the namespace
-
-'''yaml
-https://kubernetes.io/docs/reference/access-authn-authz/service-accounts-admin/#manual-secret-management-for-serviceaccounts
-'''         
-
 
 ## Generate Token Using Service Account
 
