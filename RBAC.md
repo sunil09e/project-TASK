@@ -97,3 +97,34 @@ subjects:
 > **Note:**
 > - `kubernetes.io/service-account.name` must match the **ServiceAccount** name (e.g., `jenkins`).
 > - `namespace` must match the **ServiceAccount** namespace (e.g., `webapps`).
+
+## Create the Kubernetes Resources
+
+Create the required Kubernetes resources in the following order:
+
+```bash
+
+
+vi service_account.yaml
+kubectl apply -f service_account.yaml
+
+vi role.yaml
+kubectl apply -f role.yaml
+
+vi role_bind.yaml
+kubectl apply -f role_bind.yaml
+
+vi secret.yaml
+kubectl apply -f secret.yaml -n webapps
+```
+
+## Verify the Secret
+
+Verify that the ServiceAccount token has been generated:
+
+```bash
+kubectl -n webapps describe secret mysecretname
+```
+
+> **Note:**
+> Replace `mysecretname` with the name of the Secret you created (for example, `jenkins-token`).
